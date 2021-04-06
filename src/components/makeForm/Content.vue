@@ -12,18 +12,19 @@
         @click="showForm"
         >查看表单</el-button
       >
-      <el-button
+      <!-- <el-button
         class="tpf-mf-layout--content--header--btn"
         type="text"
         icon="el-icon-view"
         @click="showJSON"
-        >查看JSON</el-button
+        >查看JSON</el-button -->
       >
     </div>
     <tp-form-box class="tpf-mf-layout--content--form" :formData="formData">
       <draggable
         class="tpf-mf-layout--content--draggable"
         v-model="formData.formDataList"
+        :disabled="main.isShow"
         group="TpFormGroup"
         animation="300"
       >
@@ -53,7 +54,7 @@ import JsonViewer from 'vue-json-viewer'
 export default {
   name: 'Content',
   components: { draggable, TpFormBox, WhichComponent, JsonViewer },
-  inject: ['formData'],
+  inject: ['formData', 'main'],
   data() {
     return {
       showFormVisible: false,
@@ -87,8 +88,9 @@ export default {
       this.$emit('select-change', item)
     },
     showForm() {
-      this.form = this.$parent.$getFormDataByVueSet()
-      this.showFormVisible = true
+      this.main.isShow = !this.main.isShow
+      // this.form = this.$parent.$getFormDataByVueSet()
+      // this.showFormVisible = true
       // this.$store.state.formData = this.formData
       // this.$router.push('/show')
       // let routerUrl = this.$router.resolve({ path: '/show' })

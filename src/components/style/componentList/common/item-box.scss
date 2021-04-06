@@ -1,17 +1,15 @@
 .tpf-mf-item {
   position: relative;
-  width: 100%;
-  min-height: $mf-item-height;
+  width: 50%;
+  
+  
   box-sizing: border-box;
   padding: 3px 10px;
-  @include display-flex(column, nowrap, center, center);
+  // @include display-flex(column, nowrap, center, center);
+  display: inline-block;
+  vertical-align: top;
   border: 1px solid transparent;
-  &:hover {
-    border-color: $primary-color;
-    .tpf-mf-item--op--delete, .tpf-mf-item--op--copy {
-      visibility: visible;
-    }
-  }
+  
   &__active {
     border-color: $warning-color;
     .tpf-mf-item--op--delete, .tpf-mf-item--op--copy {
@@ -53,6 +51,11 @@
     }
   }
 
+  & .tpf-mf-item__flex {
+    min-height: $mf-item-height;
+    @include display-flex(column, nowrap, center, center);
+  }
+
   & .required {
     .el-form-item__label::before{
       content: '*';
@@ -71,3 +74,12 @@
 //     }
 //   }
 // }
+
+.tpf-mf-item__hover {
+  &:hover {
+    border-color: $primary-color;
+    .tpf-mf-item--op--delete, .tpf-mf-item--op--copy {
+      visibility: visible;
+    }
+  }
+}

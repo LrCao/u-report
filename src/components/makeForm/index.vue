@@ -1,6 +1,6 @@
 <template>
   <div class="tpf-mf-layout">
-    <div class="tpf-mf-layout--left">
+    <div v-if="!isShow" class="tpf-mf-layout--left">
       <!-- 左侧组件 -->
       <Items :componentsList="componentsList"></Items>
     </div>
@@ -9,7 +9,7 @@
       <Content @change="contentChange" @select-change="contentSelectChange"></Content>
     </div>
     <!-- 组件属性设置 -->
-    <div class="tpf-mf-layout--right">
+    <div v-if="!isShow" class="tpf-mf-layout--right">
       <Setting :data="settingData" v-if="form.formDataList.length && settingData"></Setting>
     </div>
   </div>
@@ -29,12 +29,14 @@ export default {
   provide() {
     return {
       formData: this.form,
+      main: this,
       contentSelectChange: this.contentSelectChange,
     }
   },
   data() {
     return {
       componentsList: componentsList,
+      isShow: false,
       form: {
         formDataList: [],
         formStyle: {
